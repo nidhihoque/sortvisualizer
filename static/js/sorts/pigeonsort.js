@@ -83,7 +83,51 @@ void pigeonHoleSort(int arr[], int n) {
 	}
 }`,
 	"C++": `
-TODO`,
+int minimum(int arr[], int n) {
+	int min, i;
+	min = arr[0];
+	for (i = 1; i < n; i++) {
+		if (arr[i] < min)
+			min = arr[i];
+	}
+	return min;
+}
+
+int maximum(int arr[], int n) {
+	int max, i;
+	max = arr[0];
+	for (i = 1; i < n; i++) {
+		if (arr[i] > max)
+			max = arr[i];
+	}
+	return max;
+}
+
+void pigeonHoleSort(int arr[], int n) {
+	static int holes[MAX_HOLES][MAX_HOLE_DEPTH];
+	static int nPigeons[MAX_HOLES];
+	int i, j, min, max, range;
+
+	for (i = 0; i < MAX_HOLES; i++) {
+		nPigeons[i] = 0;
+	}
+
+	min = minimum(arr, n);
+	max = maximum(arr, n);
+	range = max - min + 1;
+
+	for (i = 0; i < n; i++) {
+		j = arr[i] - min;
+		holes[j][nPigeons[j]++] = arr[i];
+	}
+
+	i = 0;
+	for (j = 0; j < range; j++) {
+		while (nPigeons[j] > 0) {
+			arr[i++] = holes[j][--nPigeons[j]];
+		}
+	}
+}`,
 	"Java": `
 TODO`,
 	"JavaScript": `
