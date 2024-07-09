@@ -1,0 +1,32 @@
+{% extends "parents/base_sort.html" %}
+
+{% block title %}
+Slow Sort
+{% endblock %}
+
+{% block info %}
+<p>
+Slow Sort is a whimsical and impractical sorting algorithm created as a satirical take on efficient sorting methods. Introduced as a playful jest by Andrei Broder and Jorge Stolfi in 1999, the algorithm is deliberately crafted to be inefficient, boasting an exceptionally high time complexity that renders it unsuitable for practical applications.
+</p>
+Slow Sort exemplifies a concept humorously termed "Multiply And Surrender," a tongue-in-cheek twist on the classic "divide and conquer" strategy. The algorithm operates by iteratively identifying the maximum element in the array and relocating it to the last position. This process repeats recursively, dividing the array in half each time, until all elements are sorted in ascending order. However, due to its recursive nature and inefficient approach, Slow Sort is more of a theoretical exercise than a viable sorting solution in real-world scenarios.
+{% endblock %}
+
+{% block medio %}
+O(n<sup>log(n)/2</sup>)
+{% endblock %}
+
+{% block migliore %}
+O(n<sup>log(n)/2</sup>)
+{% endblock %}
+
+{% block peggiore %}
+O(n<sup>log(n)/2</sup>)
+{% endblock %}
+
+{% block memoria %}
+O(1)
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/sorts/slowsort.js') }}" defer></script>
+{% endblock %}
