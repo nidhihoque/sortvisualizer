@@ -26,7 +26,7 @@ def home():
 
 sorts = [
             "quicksort", "bubblesort", "selectionsort", "insertionsort", "radixsort", "heapsort", "gnomesort", "mergesort",
-            "bogosort", "shellsort", "shakersort", "bitonicsort", "oddevensort", "combsort", "pancakesort", "customsort", "pigeonsort"
+            "bogosort", "shellsort", "shakersort", "bitonicsort", "oddevensort", "combsort", "pancakesort", "customsort", "pigeonsort", "slowsort"
         ]
 
 for sort in sorts:
