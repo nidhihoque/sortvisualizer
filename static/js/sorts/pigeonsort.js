@@ -7,20 +7,20 @@ async function run() {
 async function pigeonholeSort(arr) {
 	/* calculate range of values */
 	const values = arr.map((e, i) => getValue(i))
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    const range = max - min + 1;
+	const min = Math.min(...values);
+	const max = Math.max(...values);
+	const range = max - min + 1;
 
 	/* initialize holes array */
-    let holes = new Array(range)
+	let holes = new Array(range)
 	for (i = 0; i < range; i++) {
 		holes[i] = new Array();
 	}
 
 	/* put elements in holes */
-    for (let i = 0; i < arr.length; i++) {
-        holes[values[i] - min].push(arr[i]);
-    }
+	for (let i = 0; i < arr.length; i++) {
+		holes[values[i] - min].push(arr[i]);
+	}
 
 	/* move elements from holes back to array */
 	let arrIdx1 = 0;
