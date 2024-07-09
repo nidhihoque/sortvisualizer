@@ -1,5 +1,11 @@
 const SHUFFLE_DELAY = 2000;
 const SORT_DELAY = 5000;
+const SPEED_MULTIPLIERS = {
+  slow: 2,
+  normal: 1,
+  fast: 0.25
+};
+var currentSpeedMultiplier = SPEED_MULTIPLIERS.normal
 const RED = "element-red";
 const BLUE = "element-blue";
 const GREEN = "element-green";
@@ -13,7 +19,9 @@ const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 
 window.addEventListener("load", () => {
     fillBox();
+    updateSortSpeed();
     document.getElementById("audio").addEventListener("click", audioButton);
+    document.getElementById("sort-speed").addEventListener("change", updateSortSpeed);
     updateAudioIcon();
 
     sleep(1432).then(() => {
@@ -63,20 +71,25 @@ function clearBox(box) {
         box.removeChild(box.lastElementChild);
     }
 }
+function updateSortSpeed() {
+  const speedSelect = document.getElementById("sort-speed");
+  const selectedSpeed = speedSelect.value || "slow";
+  currentSpeedMultiplier = SPEED_MULTIPLIERS[selectedSpeed];
+}
 
 async function shuffle() {
     running = true;
     disableButtons();
     for (let i = 0; i < elements.length; i++) {
         let rand_index = Math.floor(Math.random() * elements.length);
-        await swap(i, rand_index, SHUFFLE_DELAY/elements.length);
+        await swap(i, rand_index, (SHUFFLE_DELAY/elements.length) * currentSpeedMultiplier);
     }
     activateButtons();
     running = false;
 }
 
 async function swap(i, j, delay) {
-    if (typeof delay === "undefined") delay = SORT_DELAY / elements.length;
+    if (typeof delay === "undefined") delay = (SORT_DELAY / elements.length) * currentSpeedMultiplier;
     let freq = Math.floor(( (getValue(i) + getValue(j)) / 200) * (FREQ_MAX - FREQ_MIN) + FREQ_MIN);
     playNote(freq, NOTE_DURATION);
     if (!running) return;
