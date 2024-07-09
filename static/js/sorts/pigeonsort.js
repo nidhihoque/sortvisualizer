@@ -6,7 +6,7 @@ async function run() {
 
 async function pigeonholeSort(arr) {
 	/* calculate range of values */
-	const values = arr.map((e, i) => getValue(i))
+	const values = arr.map((e, i) => parseInt(getValue(i)*10))
 	const min = Math.min(...values);
 	const max = Math.max(...values);
 	const range = max - min + 1;
