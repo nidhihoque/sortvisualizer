@@ -5,22 +5,32 @@ async function run() {
 }
 
 async function pigeonholeSort(arr) {
-    let min = Math.min(...arr);
-    let max = Math.max(...arr);
-    let range = max - min + 1;
+	/* calculate range of values */
+	const values = arr.map((e, i) => parseInt(getValue(i)*10))
+	const min = Math.min(...values);
+	const max = Math.max(...values);
+	const range = max - min + 1;
 
-    let holes = new Array(range).fill(0);
+	/* initialize holes array */
+	let holes = new Array(range)
+	for (i = 0; i < range; i++) {
+		holes[i] = new Array();
+	}
 
-    for (let i = 0; i < arr.length; i++) {
-        holes[arr[i] - min]++;
-    }
+	/* put elements in holes */
+	for (let i = 0; i < arr.length; i++) {
+		holes[values[i] - min].push(arr[i]);
+	}
 
-    let index = 0;
-    for (let j = 0; j < range; j++) {
-        while (holes[j] > 0) {
-            arr[index++] = j + min;
-            holes[j]--;
-            await swap(index - 1, j, 0);
-        }
-    }
+	/* move elements from holes back to array */
+	let arrIdx1 = 0;
+	for (let holeIdx = 0; holeIdx < holes.length; holeIdx++) {
+		while (holes[holeIdx].length > 0) {
+			const holeElem = holes[holeIdx].pop();
+			/* find index of hole element in array */
+			const arrIdx2 = arr.findIndex(
+				(arrElem) => arrElem === holeElem);
+			await swap(arrIdx1++, arrIdx2);
+		}
+	}
 }
