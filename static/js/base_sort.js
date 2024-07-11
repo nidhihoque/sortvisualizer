@@ -213,10 +213,11 @@ function loadCode(btn) {
 
     btn.classList.add("menu-btns-activated");
     let code = byId("code");
-    code.innerHTML = codes[lang];
     code.className = '';
-    code.classList.add(lang.toLowerCase())
-    hljs.highlightAll();
+    code.classList.add(lang.toLowerCase());
+    code.innerHTML = hljs.highlight(codes[lang], {
+        language: lang.toLowerCase()
+    }).value;
 }
 
 function audioButton() {
