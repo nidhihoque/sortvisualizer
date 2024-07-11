@@ -1,6 +1,6 @@
 # Welcome to Sort Visualizer!
 
-https://www.sortvisualizer.com  
+https://www.sortvisualizer.com
 **Sort Visualizer** is a web application designed to better understand sorting algorithms by displaying and visualizing them.
 In the website you can find information and implementations in multiple programming languages of more than 15 sorting algorithms, categorized by their time and space complexity.
 
@@ -16,6 +16,8 @@ In the website you can find information and implementations in multiple programm
 - Shaker Sort
 - Odd Even Sort
 - Pancake Sort
+- Pigeon Sort
+- Slow Sort
 - Bitonic Sort
 - Radix Sort
 - Shell Sort
