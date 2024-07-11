@@ -165,7 +165,23 @@ public static int maximum(int arr[]) {
   return max;
 }`,
 	"JavaScript": `
-TODO`,
+function pigeonHoleSort(arr) {
+  const min = Math.min(...arr);
+  const max = Math.max(...arr);
+  const range = max - min + 1;
+
+  const holes = new Array(range);
+  for (let i = 0; i < holes.length; i++)
+    holes[i] = new Array();
+
+  for (let i = 0; i < arr.length; i++)
+    holes[arr[i] - min].push(arr[i]);
+
+  let i = 0;
+  for (let j = 0; j < holes.length; j++)
+    while (holes[j].length > 0)
+      arr[i++] = holes[j].pop();
+}`,
 	"Python": `
 TODO`
 }
