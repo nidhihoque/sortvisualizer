@@ -183,5 +183,21 @@ function pigeonHoleSort(arr) {
       arr[i++] = holes[j].pop();
 }`,
 	"Python": `
-TODO`
+def pigeon_hole_sort(arr: list[int]):
+  val_min = min(arr)
+  val_max = max(arr)
+  val_range = val_max - val_min + 1
+
+  holes = []
+  for i in range(val_range):
+    holes.append([])
+
+  for x in arr:
+    holes[x - val_min].append(x)
+
+  i = 0
+  for hole in holes:
+    while len(hole) > 0:
+      arr[i] = hole.pop()
+      i += 1`
 }
