@@ -127,7 +127,43 @@ void pigeonHoleSort(int arr[], int n) {
   }
 }`,
 	"Java": `
-TODO`,
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+
+public static void pigeonHoleSort(int arr[]) {
+  int min = minimum(arr);
+  int max = maximum(arr);
+  int range = max - min + 1;
+
+  List<Stack<Integer>> holes = new ArrayList<>(range);
+  for (int i = 0; i < range; i++)
+    holes.add(i, new Stack<>());
+
+  for (int elem : arr)
+    holes.get(elem - min).push(elem);
+
+  int i = 0;
+  for (Stack<Integer> hole : holes)
+    while (!hole.empty())
+      arr[i++] = hole.pop();
+}
+
+public static int minimum(int arr[]) {
+  int min = arr[0];
+  for (int i = 1; i < arr.length; i++)
+    if (arr[i] < min)
+      min = arr[i];
+  return min;
+}
+
+public static int maximum(int arr[]) {
+  int max = arr[0];
+  for (int i = 1; i < arr.length; i++)
+    if (arr[i] > max)
+      max = arr[i];
+  return max;
+}`,
 	"JavaScript": `
 TODO`,
 	"Python": `
