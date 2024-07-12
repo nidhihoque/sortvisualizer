@@ -23,7 +23,8 @@ In the website you can find information and implementations in multiple programm
 - Shell Sort
 - Comb Sort
 - Bogo Sort
-
+- Pigeon Sort
+  
 ## Custom Sort
 
 It's also possible to design and visualize _your own sorting algorithm_, using the [documented APIs](https://www.sortvisualizer.com/docs). Have fun messing around and trying new stuff!
