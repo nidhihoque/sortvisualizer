@@ -23,7 +23,6 @@ In the website you can find information and implementations in multiple programm
 - Shell Sort
 - Comb Sort
 - Bogo Sort
-- Pigeon Sort
   
 ## Custom Sort
 
