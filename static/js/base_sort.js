@@ -17,6 +17,11 @@ var elements = [];
 var running = false;
 const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 
+let timer;
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+
 window.addEventListener("load", () => {
     fillBox();
     updateSortSpeed();
@@ -36,7 +41,21 @@ window.addEventListener("load", () => {
         })
     }
     loadCode(menu.children[0]);
+
+    // Add event listeners for timer
+    document.getElementById('run-btn').addEventListener('click', function() {
+        if (!timer) {
+            startTimer();
+        }
+        run();  // Call the existing run function
+    });
+
+    document.getElementById('shuffle-btn').addEventListener('click', function() {
+        resetTimer();  // Reset the timer when shuffle is clicked
+        shuffle();  // Call the existing shuffle function
+    });
 });
+
 
 
 function sliderChange() {
@@ -80,11 +99,14 @@ function updateSortSpeed() {
 async function shuffle() {
     running = true;
     disableButtons();
+    resetTimer();  // Reset the timer when shuffle starts
+    startTimer();  // Start the timer when shuffle starts
     for (let i = 0; i < elements.length; i++) {
         let rand_index = Math.floor(Math.random() * elements.length);
         await swap(i, rand_index, (SHUFFLE_DELAY/elements.length) * currentSpeedMultiplier);
     }
     activateButtons();
+    stopTimer();  // Stop the timer when shuffle ends
     running = false;
 }
 
@@ -139,17 +161,22 @@ function compare(x, y) {
 async function runBtn(sort, ...args) {
     running = true;
     disableButtons();
+    resetTimer();  //reset the timer when sorting starts
+    startTimer();  //start the timer when sorting starts
     await sort(...args);
     await controlLoop();
     resetColors();
     activateButtons();
+    stopTimer();  //stop the timer when sorting ends
     running = false;
 }
 
 function stop() {
     running = false;
+    stopTimer();  //stop the timer when sorting is stopped
     fillBox();
 }
+
 
 function disableButtons() {
     btn = byId("run-btn");
@@ -232,4 +259,38 @@ function audioButton() {
 function updateAudioIcon() {
     let icons = ["volume_off", "volume_up"];
     byId("audio").firstChild.innerHTML = icons[audio | 0];
+}
+
+function startTimer() {
+    timer = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    seconds++;
+    if (seconds == 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes == 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+
+    document.getElementById('timer').textContent =
+        (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" +
+        (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" +
+        (seconds > 9 ? seconds : "0" + seconds);
+}
+
+function stopTimer() {
+    clearInterval(timer);
+    timer = null;
+}
+
+function resetTimer() {
+    stopTimer();
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    document.getElementById('timer').textContent = "00:00:00";
 }
