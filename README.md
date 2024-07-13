@@ -33,7 +33,7 @@ It's also possible to design and visualize _your own sorting algorithm_, using t
 To run the project locally, install Python 3 on your machine, clone the repository, install all the dependencies and run the `app.py` file.
 
 ```console
-git clone https://github.com/Myphz/sortvisualizer
+git clone https://github.com/nidhihoque/sortvisualizer
 cd sortvisualizer
 pip install -r requirements.txt
 python app.py
